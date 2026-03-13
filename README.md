@@ -85,28 +85,28 @@ http://localhost:8765
 ├─ static/index.html                   # 单文件前端，实现查看器界面与交互
 ├─ start-viewer.bat                    # Windows 启动脚本
 ├─ start-viewer.sh                     # macOS / Linux 启动脚本
-└─ skills/aicoding-viewer-gh-release/  # GitHub Release skill（本仓库专用）
+└─ skills/aicoding-viewer-gh-release/  # GitHub 同步 skill（保留旧目录名，不再创建 release）
 ```
 
-## 发布约定
+## GitHub 同步约定
 
-仓库内置了一个面向当前项目的 GitHub Release skill：
+仓库内置了一个面向当前项目的 GitHub 同步 skill：
 
 ```text
 skills/aicoding-viewer-gh-release
 ```
 
-它负责把这几个动作固定成一条流水线：
+它现在只负责约束这类动作：
 
-- 从 `app.py` 读取并递增版本号
-- 基于最近 tag 与 commit 生成 release 上下文
-- 生成运行包 ZIP
-- 起草 release notes
-- 用 `gh` 创建 GitHub Release
+- 校验公开工作树是否干净
+- 把公开分支同步到 GitHub 仓库
+- 清理误发的 GitHub Release 和 tag
+- 确保 `.pen` 等私有设计资产不进入公开历史
 
-设计稿属于本地私有资产，不在 GitHub README 和 GitHub Release 流程中暴露。
+当前仓库不再使用 GitHub Release 流程，不再生成发布 ZIP，不再通过版本 tag 管理对外发布。
+设计稿属于本地私有资产，不在 GitHub README、GitHub 仓库历史或任何公开发布资产中暴露。
 
-如果你准备把这个仓库推到 GitHub，建议先用这个 skill 完整走一遍本地发布演练，再创建正式 release。
+如果你准备把这个仓库同步到 GitHub，直接维护公开分支并推送即可，不需要额外创建 release。
 
 ## 当前定位
 
